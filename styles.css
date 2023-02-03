@@ -13,14 +13,14 @@
 
 }
 
-tr:nth-child(even) {
+/* tr:nth-child(even) {
     background-color: #f3f3f3;
 }
 
 tr:hover {
     background-color: rgb(214, 214, 214);
     color: black;
-}
+} */
 
 #loading {
     
@@ -37,7 +37,7 @@ tr:hover {
     visibility: visible;
     align-items: center;
     justify-content: center;
-    margin-top: 30%;
+    margin-top: 10%;
 }
 @keyframes spin {
     from {

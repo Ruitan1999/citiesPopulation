@@ -28,11 +28,11 @@ function hideLoading() {
     hideHeaders.classList.add('display');
 }
 
-function sortCounfirm () {
-    cityData.sort((a , b) => {
-        return b.confirmed - a.confirmed;
-    });
-}
+// function sortCounfirm () {
+//     cityData.sort((a , b) => {
+//         return b.confirmed - a.confirmed;
+//     }
+// }
 
 let params = ''
 
@@ -44,23 +44,7 @@ const callParams = () => {
     .then(function diplayItems (items) {
         cityData = items.data
         let tableData = "";
-        let displayCountry = cityData.map(function(item){
-            sortCounfirm ()
-            return `
-        <tr>
-            <td>${item.region.province}</td>
-            <td>${item.date}</td>
-            <td>${item.confirmed}</td>
-            <td>${item.deaths}</td>
-            <td>${item.active}</td>
-            <td>${item.fatality_rate}</td>
-            <td>${item.last_update}</td>
-        </tr>          
-            `
-        });
-        displayCountry = displayCountry.join('');
-        hideLoading();
-        tableCtn.innerHTML = displayCountry;
+        displayCountry = createRows(items.data);
     })
     
 }
@@ -73,3 +57,43 @@ userInput.addEventListener('keyup', function(e){
     }
 });
 
+function createRows (items) {
+    displayCountry = items.map(function(item){
+        // sortCounfirm ()
+        return `
+    <tr>
+        <td>${item.region.province}</td>
+        <td>${item.date}</td>
+        <td>${item.confirmed}</td>
+        <td>${item.deaths}</td>
+        <td>${item.active}</td>
+        <td>${item.fatality_rate}</td>
+        <td>${item.last_update}</td>
+    </tr>          
+        `
+    });
+    displayCountry = displayCountry.join('');
+        hideLoading();
+        tableCtn.innerHTML = displayCountry;
+}
+
+function sortColumn (columnName) {
+    const dataType = typeof cityData[0][columnName];
+    
+    sortDirection =  !sortDirection; 
+
+    switch(dataType) {
+        case `number`:
+            sortNumbeColumn(sortDirection, columnName);
+            break;
+    }
+    
+    console.log(cityData);
+    createRows(cityData);
+}
+
+function sortNumbeColumn (sort, columnName) {
+    cityData = cityData.sort((a, b) => {
+        return sort ? a[columnName] - b[columnName] : b[columnName] - a[columnName]
+    });
+}
