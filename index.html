@@ -13,27 +13,27 @@
     <div class="input-group mb-3" id="search">
         <input type="text" class="form-control" placeholder="Enter Country Name" aria-label="Enter Country Name" aria-describedby="button-addon2">
         <button class="btn btn-primary" type="button" id="button-addon2">Search</button>
-      </div>
+    </div>
    
     <div class="container">
-  
-    <table class="table table-bordered">
+        <table class="table table-bordered">
         
-        <thead class="table-dark">
-          <tr>
-            <th scope="col">Province</th>
-            <th scope="col">Date</th>
-            <th scope="col">Confirmed Case</th>
-            <th scope="col">Deaths</th>
-            <th scope="col">Active</th>
-            <th scope="col">Fatality Rate</th>
-            <th scope="col">Last Update</th>
-          </tr>
-        </thead>
-       
-        <tbody class="trtr">
-            <div id="loading"></div>
-      </table>
+            <div id="tableHeader">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">Province</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Confirmed Case</th>
+                    <th scope="col">Deaths</th>
+                    <th scope="col">Active</th>
+                    <th scope="col">Fatality Rate</th>
+                    <th scope="col">Last Update</th>
+                </tr>
+                </thead>
+            </div>
+            <tbody class="trtr">
+                <div id="loading"></div>
+        </table>
     </div>
   </body>
   <script src="app.js"></script>

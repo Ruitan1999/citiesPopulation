@@ -26,8 +26,9 @@
 }
 #loading.display {
     visibility: visible;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30%;
 }
 @keyframes spin {
     from {
@@ -37,3 +38,14 @@
         transform: rotate(360deg);
     }
 }
+
+.container {
+    visibility: hidden;
+}
+
+
+
+.container.display {
+    visibility: visible;
+}
+

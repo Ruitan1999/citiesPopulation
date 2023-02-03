@@ -11,8 +11,17 @@ const options = {
 		'X-RapidAPI-Host': 'covid-19-statistics.p.rapidapi.com'
 	}
 };
-
+const hideHeaders = document.querySelector('.container')
 const loader = document.querySelector('#loading');
+
+function displayHeader() {
+    hideHeaders.classList.remove('display');
+}
+
+function hideHeader() {
+    hideHeaders.classList.add('display');
+}
+
 
 function displayLoading() {
     loader.classList.add('display');
@@ -29,7 +38,9 @@ let params = ''
 
 const callParams = () => {
     params = userInput.value 
+    displayHeader();
     displayLoading();
+   
     fetch(`https://covid-19-statistics.p.rapidapi.com/reports?region_name=${params}`, options)
     .then(response => response.json())
     .then(function diplayItems (items) {
@@ -51,6 +62,7 @@ const callParams = () => {
         });
         displayCountry = displayCountry.join('');
         hideLoading();
+        hideHeader();
         tableCtn.innerHTML = displayCountry;
     })
     .catch(err => console.error(err));
