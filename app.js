@@ -12,38 +12,56 @@ const options = {
 	}
 };
 
+const loader = document.querySelector('#loading');
+
+function displayLoading() {
+    loader.classList.add('display');
+    setTimeout(() => {
+        loader.classList.remove('display');
+    }, 5000);
+}
+
+function hideLoading() {
+    loader.classList.remove('display');
+}
 
 let params = ''
 
 const callParams = () => {
-    params = userInput.value
-    
-
-
-fetch(`https://covid-19-statistics.p.rapidapi.com/reports?iso=${params}`, options)
-.then(response => response.json())
-.then(function diplayItems (items) {
-    let tableData = "";
-
-    let displayCountry = items.data.map(function(item){
-        return `
-      <tr>
-        <td>${item.region.province}</td>
-        <td>${item.date}</td>
-        <td>${item.confirmed}</td>
-        <td>${item.deaths}</td>
-        <td>${item.active}</td>
-        <td>${item.fatality_rate}</td>
-        <td>${item.last_update}</td>
-      </tr>          
-        `
-    });
-    displayCountry = displayCountry.join('');
-    tableCtn.innerHTML = displayCountry;
-})
-.catch(err => console.error(err));
-    userInput.value = '';
+    params = userInput.value 
+    displayLoading();
+    fetch(`https://covid-19-statistics.p.rapidapi.com/reports?region_name=${params}`, options)
+    .then(response => response.json())
+    .then(function diplayItems (items) {
+        
+        let tableData = "";
+        let displayCountry = items.data.map(function(item){
+            
+            return `
+        <tr>
+            <td>${item.region.province}</td>
+            <td>${item.date}</td>
+            <td>${item.confirmed}</td>
+            <td>${item.deaths}</td>
+            <td>${item.active}</td>
+            <td>${item.fatality_rate}</td>
+            <td>${item.last_update}</td>
+        </tr>          
+            `
+        });
+        displayCountry = displayCountry.join('');
+        hideLoading();
+        tableCtn.innerHTML = displayCountry;
+    })
+    .catch(err => console.error(err));
+        userInput.value = '';
 }
 
 
 btn.addEventListener('click', callParams)
+userInput.addEventListener('keyup', function(e){
+    if (e.key === "Enter") {
+        callParams();
+    }
+});
+
