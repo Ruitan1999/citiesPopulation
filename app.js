@@ -1,8 +1,4 @@
-
-const tableCtn = document.querySelector('.trtr');
-const userInput = document.querySelector('input');
-const btn = document.querySelector('button');
-
+let sortDirection = false;
 
 const options = {
 	method: 'GET',
@@ -11,10 +7,13 @@ const options = {
 		'X-RapidAPI-Host': 'covid-19-statistics.p.rapidapi.com'
 	}
 };
+
+const tableCtn = document.querySelector('.trtr');
+const userInput = document.querySelector('input');
+const btn = document.querySelector('button');
 const hideHeaders = document.querySelector('.container')
 const loader = document.querySelector('#loading');
 let cityData
-
 
 function displayLoading() {
     hideHeaders.classList.remove('display');
@@ -34,7 +33,6 @@ function sortCounfirm () {
         return b.confirmed - a.confirmed;
     });
 }
-
 
 let params = ''
 
@@ -64,8 +62,7 @@ const callParams = () => {
         hideLoading();
         tableCtn.innerHTML = displayCountry;
     })
-        .catch(err => console.error(err));
-        userInput.value = '';
+    
 }
 
 
