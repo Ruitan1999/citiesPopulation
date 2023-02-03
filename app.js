@@ -13,17 +13,11 @@ const options = {
 };
 const hideHeaders = document.querySelector('.container')
 const loader = document.querySelector('#loading');
-
-function displayHeader() {
-    hideHeaders.classList.remove('display');
-}
-
-function hideHeader() {
-    hideHeaders.classList.add('display');
-}
+let cityData
 
 
 function displayLoading() {
+    hideHeaders.classList.remove('display');
     loader.classList.add('display');
     setTimeout(() => {
         loader.classList.remove('display');
@@ -32,22 +26,28 @@ function displayLoading() {
 
 function hideLoading() {
     loader.classList.remove('display');
+    hideHeaders.classList.add('display');
 }
+
+function sortCounfirm () {
+    cityData.sort((a , b) => {
+        return b.confirmed - a.confirmed;
+    });
+}
+
 
 let params = ''
 
 const callParams = () => {
     params = userInput.value 
-    displayHeader();
     displayLoading();
-   
     fetch(`https://covid-19-statistics.p.rapidapi.com/reports?region_name=${params}`, options)
     .then(response => response.json())
     .then(function diplayItems (items) {
-        
+        cityData = items.data
         let tableData = "";
-        let displayCountry = items.data.map(function(item){
-            
+        let displayCountry = cityData.map(function(item){
+            sortCounfirm ()
             return `
         <tr>
             <td>${item.region.province}</td>
@@ -62,10 +62,9 @@ const callParams = () => {
         });
         displayCountry = displayCountry.join('');
         hideLoading();
-        hideHeader();
         tableCtn.innerHTML = displayCountry;
     })
-    .catch(err => console.error(err));
+        .catch(err => console.error(err));
         userInput.value = '';
 }
 
