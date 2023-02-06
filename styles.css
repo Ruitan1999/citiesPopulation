@@ -13,14 +13,26 @@
 
 }
 
-/* tr:nth-child(even) {
+.trtr tr:nth-child(even) {
     background-color: #f3f3f3;
 }
 
-tr:hover {
+.trtr tr:hover {
     background-color: rgb(214, 214, 214);
     color: black;
-} */
+} 
+
+.table-dark th {
+    cursor: pointer;
+    
+}
+
+
+
+
+
+
+
 
 #loading {
     
@@ -49,12 +61,23 @@ tr:hover {
 }
 
 .container {
-    visibility: hidden;
+    display: none;
 }
 
 
 
 .container.display {
-    visibility: visible;
+    display: block;
 }
 
+
+.card {
+   width: 50vw;
+   display: inline;
+    justify-content: center;
+    
+}
+
+#match-list.matches {
+    align-items: center;
+}

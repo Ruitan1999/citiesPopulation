@@ -13,21 +13,23 @@
     <div class="input-group mb-3" id="search">
         <input type="text" class="form-control" placeholder="Enter Country Name" aria-label="Enter Country Name" aria-describedby="button-addon2">
         <button class="btn btn-primary" type="button" id="button-addon2">Search</button>
+              
     </div>
-   
+    <div id="match-list" class="matches"></div>  
+    <h1 class="countryName"></h1>
     <div class="container">
         <table class="table table-bordered">
         
             <div id="tableHeader">
                 <thead class="table-dark">
                 <tr>
-                    <th scope="col">Province</th>
+                    <th onclick="sortColumn('province')" scope="col">Province</th>
                     <th scope="col">Date</th>
-                    <th onclick="sortColumn('confirmed')" scope="col">Confirmed Case</th>
-                    <th scope="col">Deaths</th>
-                    <th scope="col">Active</th>
-                    <th scope="col">Fatality Rate</th>
-                    <th scope="col">Last Update</th>
+                    <th class="arrow" onclick="sortColumn('confirmed')" scope="col">Confirmed Case <div id="confirmed-arrow">&#9650</div></th>
+                    <th onclick="sortColumn('deaths')" scope="col">Deaths<div id="deaths-arrow">&#9650</div></th>
+                    <th  onclick="sortColumn('active')" scope="col">Active<div id="active-arrow">&#9650</div></th>
+                    <th  onclick="sortColumn('fatality_rate')" scope="col">Fatality Rate<div id="fatality_rate-arrow">&#9650</div></th>
+                    <th onclick="sortColumn('last_update')" scope="col">Last Update</th>
                 </tr>
                 </thead>
             </div>
