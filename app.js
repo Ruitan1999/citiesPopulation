@@ -93,11 +93,7 @@ const outputHtml = matches => {
             
             `
             <div class="resultsCard">
-            <button  class="searchBtn" onclick="userInput.value ='${
-            match.name
-        }'">${
-            match.name
-        } </button>
+            <button  class="searchBtn" onclick="userInput.value ='${match.name}'; callParams()"; matchList.innerHTML = '';>${match.name} </button>
             </div>
             `).join('');
             
