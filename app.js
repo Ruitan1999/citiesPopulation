@@ -52,26 +52,28 @@ function hideLoading() {
 let params = ''
 
 function searchStates(searchText) {
-    fetch('https://covid-19-statistics.p.rapidapi.com/reports', getCountryName).then(response => response.json()).then(function countryNames(items) {
+    fetch('https://covid-19-statistics.p.rapidapi.com/reports', getCountryName)
+    .then(response => response.json())
+    .then(function countryNames(items) {
         let matches = items.data.filter(item => {
             const regex = new RegExp(`^${searchText}`, 'gi');
             return item.region.name.match(regex);
         });
 
-        // function getUniqueContries(countries) {
-        //     let getCountries = items.data;
-        //     matches.forEach(function (item) {
-        //         if (! getCountries.includes(item.region.name)) {
-        //             getCountries.push(item.region.name);
-        //         }
-        //     });
-        //     return getCountries;
-        // }
-        // console.log(getCountries);
-
-        // foreach i as matches
-        // if output !contain i than output .add i
-
+        const result = [];
+        const map = new Map();
+        for (const item of matches) {
+            if(!map.has(item.region.name)) {
+                if(!map.has(item.region.name)){
+                    map.set(item.region.name, true);
+                    result.push({
+                        name: item.region.name
+                    });
+                }
+        }
+    }
+        console.log(result);
+    
 
         if (searchText.length === 0) {
             matches = [];
@@ -79,22 +81,26 @@ function searchStates(searchText) {
         }
 
 
-        outputHtml(matches);
+        outputHtml(result);
     });
 }
 
 // show results in HTMl
 const outputHtml = matches => {
     if (matches.length > 0) {
-        const html = matches.map(match => `
+       
+        const html = matches.map(match => 
+            
+            `
             <div class="resultsCard">
             <button  class="searchBtn" onclick="userInput.value ='${
-            match.region.name
+            match.name
         }'">${
-            match.region.name
+            match.name
         } </button>
             </div>
             `).join('');
+            
         matchList.innerHTML = html;
 
         const searchBtnClear = document.querySelector('.matches');
@@ -108,7 +114,9 @@ const outputHtml = matches => {
 const callParams = () => {
     params = userInput.value
     displayLoading();
-    fetch(`https://covid-19-statistics.p.rapidapi.com/reports?region_name=${params}`, options).then(response => response.json()).then(function diplayItems(items) {
+    fetch(`https://covid-19-statistics.p.rapidapi.com/reports?region_name=${params}`, options)
+    .then(response => response.json())
+    .then(function diplayItems(items) {
         cityData = items.data
         displayCountry = createRows(items.data);
     }).catch(err => console.error(err));
