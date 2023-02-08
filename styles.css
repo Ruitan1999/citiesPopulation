@@ -61,13 +61,13 @@
 }
 
 .container {
-    display: none;
+    visibility:hidden;
 }
 
 
 
 .container.display {
-    display: block;
+    visibility:visible;
 }
 
 
